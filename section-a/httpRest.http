@@ -1,0 +1,15 @@
+# 测试请求
+GET http://localhost:8080/restful/get
+Authorization: Basic user 123456
+### Post请求
+POST http://localhost:8080/restful/getWithName?name=张三
+Authorization: Basic user 123456
+Content-Type: application/json
+
+    {
+    "gender":"男",
+    "vip": false
+    }
+### Put请求
+PUT http://localhost:8080/restful/putName/王五
+Authorization: Basic user 123456
