@@ -22,3 +22,4 @@ Spring Security configs
  - <p>3.x 后推荐使用2. AuthenticationManager Bean: 
         创建 UserDetailsService Bean 提供用户数据,
         然后使用AuthenticationManagerBuilder来构建 AuthenticationManager</p>
+   

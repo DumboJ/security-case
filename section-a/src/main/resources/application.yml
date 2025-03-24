@@ -10,12 +10,15 @@ logging:
                   %clr([%8.15t]){cyan} %clr(%-40.40logger{0}){blue} %clr(:){red} %clr(%m){faint}%n'
 server:
   port: 8080
-  spring:
-    message:
-      basename: message
-      encoding: UTF_8
+
 spring:
-  security:
-    user:
-      name: user
-      password: 123456
+#  #???Spring Security ??????
+#  security:
+#    user:
+#      name: user
+#      password: 123456
+#      roles: USER,ADMIN
+  #???????? Resource Bundle ????
+  messages:
+    basename: messages
+    encoding: utf-8

@@ -1,0 +1,8 @@
+#自定义 filter 测试
+POST http://localhost:8080/customizer/first
+Content-Type: application/json
+
+{
+    "username":"user",
+    "password": "123456"
+}
