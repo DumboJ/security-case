@@ -4,9 +4,7 @@ import cn.dumboj.config.AppProperties;
 import cn.dumboj.utils.CollectionUtils;
 import cn.dumboj.utils.JwtUtils;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.SignatureException;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +16,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +42,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (checkToken(request)) {//验证请求头信息是否符合规范
 
             // 验证 请求信息中的 token 信息是否包含必要权限集，是处理并通过验证，否则关闭验证
-            vlidateToken(request)
+            validToken(request)
                     .filter(claims -> claims.get("authorities") != null)
                     .ifPresentOrElse(
                               //有值，设置SpringSecurity Authentication
@@ -72,8 +69,10 @@ public class JwtFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-    /**/
-    private Optional<Claims> vlidateToken(HttpServletRequest request) {
+    /**
+     * 获取头信息中的 token
+     * */
+    private Optional<Claims> validToken(HttpServletRequest request) {
         String jwtToken = request.getHeader(appProperties.getJwt().getHeader())
                 .replace(appProperties.getJwt().getPrefix(), "");
 
@@ -88,6 +87,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     /**
      * 验证头信息中认证头是否符合规范
+     * Authorization: Bearer token
      * */
     private boolean checkToken(HttpServletRequest request) {
         String header = request.getHeader(appProperties.getJwt().getHeader());

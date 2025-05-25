@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 
 @Component
 public class JwtUtils {
-    public static final Key accessKey = Keys.secretKeyFor(SignatureAlgorithm.ES512);
+    public static final Key accessKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     public static final Key refreshKey = Keys.secretKeyFor(SignatureAlgorithm.ES512);
 
     @Autowired
